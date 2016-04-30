@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// . stand for this file location
+import SearchBar from './components/search_bar';
 
+const YOUTUBE_API_KEY = 'AIzaSyAtvhKcOUVY0ED-JSm-XeEtcwX1XBxBmk8';
 // Create a new Component - produce html
 
-// A Component Class
+//A Component Class
 // const App = function() {
 //   return <div>123</div>;
 // }
 
 const App = () => {
-  return <div>Hi!</div>
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  );
 }
-
 
 
 // Take this component's generated HTML and put it
