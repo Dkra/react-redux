@@ -1,29 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-// . stand for this file location
+import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
-
+import VideoList from './components/video_list';
 const YOUTUBE_API_KEY = 'AIzaSyAtvhKcOUVY0ED-JSm-XeEtcwX1XBxBmk8';
-// Create a new Component - produce html
 
-//A Component Class
-// const App = function() {
-//   return <div>123</div>;
-// }
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      videos: [],
+    };
 
-const App = () => {
-  return (
-    <div>
-      <SearchBar />
-    </div>
-  );
+    YTSearch({key: YOUTUBE_API_KEY, term: 'surfboards'}, (videos) => {
+      // this.setState({ videos: videos });
+      this.setState({ videos });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <VideoList videos={this.state.videos}/>
+      </div>
+    )
+  }
 }
 
-
-// Take this component's generated HTML and put it
-// on the page (in the DOM)
-
-// should pass a instance
-// App is a class
-// <App></App> is a instances & is equal to </App>
 ReactDOM.render(<App />, document.querySelector('.container'));

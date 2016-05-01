@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 
 class SearchBar extends Component {
-  render() {
-    // return <input onChange={this.onInputChange} />;
-    // More cleaner
-    return <input onChange={(event) => console.log(event.target.value)} />;
+
+  // states is a js object, use to record and react to user events
+
+  // each class base component has its own states object
+
+  // when component states is change, component immediately rerender
+
+  // as also rerender its children as well
+
+  constructor(props) {
+
+    super(props);
+
+    // initialize state object in constructor
+
+    this.state = { term: '' };
   }
 
-  // Normal
-  // onInputChange(event) {
-  //   console.log(event.target.value);
-  // }
+  // use setState except initialize state object
+  // controled form element
+  render() {
+    return (
+      <div>
+        <input
+          value={this.state.term}
+          onChange={(event) => this.setState({ term: event.target.value })} />
+        value of the input: { this.state.term }
+      </div>
+    );
+  }
 
-  // A bit better
-  // onInputChange = (event) => {
-  //   console.log(event.target.value);
-  // }
 }
 
 export default SearchBar;
