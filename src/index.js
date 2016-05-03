@@ -12,22 +12,24 @@ class App extends Component {
     super(props);
     this.state = {
       videos: [],
-      selectedVideo: null
+      selectedVideo: null,
+      term: 'surfboards'
     };
 
-    YTSearch({key: YOUTUBE_API_KEY, term: 'surfboards'}, (videos) => {
-      // this.setState({ videos: videos });
+    this.videoSearch(this.state.term);
+  }
+  videoSearch(term) {
+    YTSearch({key: YOUTUBE_API_KEY, term: term}, (videos) => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
       });
     });
   }
-
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar videoSearch={term => this.videoSearch(term)}/>
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
           videos={this.state.videos}
